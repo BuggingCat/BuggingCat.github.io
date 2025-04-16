@@ -1,6 +1,6 @@
 ## Hi there 👋
 
-
+![image](./01.png)
 I'm **LIN Le** — welcome to my page!
 
 I'm currently a fourth-year undergraduate student at South China University of Technology, supervised by Professor LI GuiQing, majoring in Mathematics and Applied Mathematics with a minor in Computer Science and Technology. I'm also a visiting student at VisLab, in the Department of Computer Science and Engineering at Hong Kong University of Science and Technology. My interests lie in Computer Graphics.
