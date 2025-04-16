@@ -1,5 +1,6 @@
 ## Hi there 👋
 
+Here is LIN Le! I'm looking forward to make friends with you~
 <!--
 **BuggingCat/BuggingCat** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
@@ -15,4 +16,4 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-Here is LIN Le! I'm looking forward to make friends with you~
+
