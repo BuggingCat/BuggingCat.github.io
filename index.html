@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LIN Le</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      line-height: 1.6;
+      padding: 0 20px;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: nowrap; 
+      gap: 20px;
+      justify-content: center;
+      margin-top: 50px;
+      overflow: hidden;         /* 隐藏容器溢出的内容--滚动条 */
+      height: 220px;          /* 设置更大的高度 */
+    }
+    .gallery-item {
+      opacity: 0;
+      transform: translateY(30px);
+      border-radius: 0;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .gallery-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .gallery-item img {
+      width: 100%;
+      /*border-radius: 10px;*/
+      /*box-shadow: 0 4px 10px rgba(0,0,0,0.1);*/
+      transition: transform 0.3s ease-in-out;  /* 平滑过渡效果 */
+    }
+    .gallery-item:hover img {
+      transform: scale(1.1);  /* 鼠标悬停时放大图片 */
+    }
+    .intro {
+      max-width: 700px;
+      margin: 50px auto;
+    }
+    .intro-image {
+      position: absolute;
+      top: 250px;
+      width: 120px;            /* 可自定义大小 */
+      height: auto;
+      right: 50px;
+      opacity: 0;              /* 初始透明 */
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🖼 Paintings Section -->
+  <div class="gallery">
+    <div class="gallery-item"><img src="https://buggingcat.github.io/paintings/10.png" style="width: 280px;" alt="Unable to load image sea"></div>
+    <div class="gallery-item"><img src="https://buggingcat.github.io/paintings/夕阳2.png" style="width: 160px;" alt="Unable to load image sunset"></div>
+    <div class="gallery-item"><img src="https://buggingcat.github.io/paintings/2ce5e5e973cccc5707af9a3ea36a9ec.jpg" style="width: 180px;"alt="Unable to load watercolor painting"></div>
+    <!-- Add more images as needed -->
+  </div>
+
+  <div class="intro">
+    <h1>Hello, I'm LIN Le 👋</h1>
+    <img src="https://buggingcat.github.io/01.png" alt="Unable to load bugcat" class="intro-image fade-in">
+    <p>Welcome to my page! I'm currently a fourth-year undergraduate student at South China University of Technology, supervised by Professor LI GuiQing, majoring in Mathematics and Applied Mathematics with a minor in Computer Science and Technology. I'm also a visiting student at VisLab, led by Professor QU HuaMin, in the Department of Computer Science and Engineering at the Hong Kong University of Science and Technology. My interests lie in Computer Graphics.</p>
+
+    <p> I'm an amateur artist and athlete. I enjoy watercolor, digital painting, running, and orienteering. </p>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.gallery-item').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
