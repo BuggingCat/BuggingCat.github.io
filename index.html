@@ -84,6 +84,67 @@
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+    .publications {
+      max-width: 900px;
+      margin: 80px auto 60px auto;
+    }
+    
+    .pub-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      background: linear-gradient(90deg, #6a8cff, #8fd3f4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .pub-item {
+      border: 1px solid #d0d0d0;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 18px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .pub-item:hover {
+      border-color: #8fbfff;
+      box-shadow: 0 4px 12px rgba(120, 170, 255, 0.15);
+    }
+    
+    .pub-authors {
+      font-size: 15px;
+      color: #444;
+      margin-bottom: 4px;
+    }
+    
+    .pub-paper-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 4px;
+    }
+    
+    .pub-meta {
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .pub-status {
+      color: #4f7cff;
+      font-weight: 500;
+    }
+
+    .conf-badge {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 2px 6px;
+      font-size: 12px;
+      border-radius: 6px;
+      background-color: #eef5ff;
+      color: #3b6fb6;
+      border: 1px solid #cddfff;
+      vertical-align: middle;
+    }
   </style>
 </head>
 <body>
@@ -111,6 +172,33 @@
     <p> I'm an amateur artist and athlete. I enjoy watercolor, digital painting, running, and orienteering. </p>
   </div>
 
+  <div class="publications fade-in">
+  <h2 class="pub-title">Publications</h2>
+    <div class="pub-item">
+      <div class="pub-authors">
+        Lin-Ping Yuan,
+        <strong>Le Lin</strong>,
+        Yuquan Lin,
+        Jun Han,
+        Zikun Deng,
+        Weicong Cheng,
+        Huamin Qu
+      </div>
+    
+      <div class="pub-paper-title">
+        Towards Understanding Time-Varying Spatial 3D Data Analysis with
+        Animation and Small Multiples in Virtual Reality and Desktop
+      </div>
+    
+      <div class="pub-meta">
+        IEEE Conference on Virtual Reality and 3D User Interfaces (2026)
+        <span class="conf-badge">IEEE VR</span>
+        —
+        <span class="pub-status">Accepted (Camera-ready submitted)</span>
+      </div>
+    </div>
+  </div>
+  
   <script>
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -126,5 +214,6 @@
 
 </body>
 </html>
+
 
 
