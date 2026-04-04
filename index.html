@@ -88,6 +88,11 @@
       max-width: 700px;
       margin: 60px auto;
     }
+    a.pub-link {
+      text-decoration: none; 
+      color: inherit; 
+      display: block; 
+    }
     
     .pub-title {
       font-size: 28px;
@@ -111,6 +116,7 @@
       padding: 14px 18px;
       margin-bottom: 16px;
       transition: border-color 0.25s ease;
+      cursor: pointer; /* 鼠标悬停时变成小手 */
     }
     
     .pub-item:hover {
@@ -171,6 +177,7 @@
 
   <div class="publications fade-in">
   <h2 class="pub-title">Publications</h2>
+    <a href="https://ieeexplore.ieee.org/abstract/document/11457508" target="_blank" class="pub-link">
     <div class="pub-item">
       <div class="pub-paper-title">
         Towards Understanding Time-Varying Spatial 3D Data Analysis with
@@ -193,6 +200,7 @@
         <span class="pub-status">Accepted (Camera-ready submitted)</span> -->
       </div>
     </div>
+    </a>
   </div>
   
   <script>
