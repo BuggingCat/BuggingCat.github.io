@@ -117,11 +117,36 @@
       margin-bottom: 16px;
       transition: border-color 0.25s ease;
       cursor: pointer; /* 鼠标悬停时变成小手 */
+      display: flex;
+      gap: 20px;
+      align-items: center; /* 垂直居中 */
     }
     
     .pub-item:hover {
       border-color: #bcd7ff;
       box-shadow: none;
+    }
+
+    .pub-img-container {
+      width: 120px;      /* 固定的方形宽度 */
+      height: 120px;     /* 固定的方形高度，可以根据需要改成 130x130 等 */
+      flex-shrink: 0;    /* 防止图片被压缩 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* background-color: #f9f9f9; 可以取消注释看方块边界 */
+    }
+
+    .pub-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* 核心：保持比例缩放，填不完全的地方留白 */
+      box-shadow: none;    /* 去掉前面全局 img 设置的阴影，比较干净 */
+      border-radius: 4px; 
+    }
+
+    .pub-text {
+      flex: 1;
     }
     
     .pub-authors {
@@ -178,28 +203,34 @@
   <div class="publications fade-in">
   <h2 class="pub-title">Publications</h2>
     <a href="https://ieeexplore.ieee.org/abstract/document/11457508" target="_blank" class="pub-link">
-    <div class="pub-item">
-      <div class="pub-paper-title">
-        Towards Understanding Time-Varying Spatial 3D Data Analysis with
-        Animation and Small Multiples in Virtual Reality and Desktop
-      </div>
-
-      <div class="pub-authors">
-        Lin-Ping Yuan,
-        <strong>Le Lin</strong>,
-        Yuquan Lin,
-        Jun Han,
-        Zikun Deng,
-        Weicong Cheng,
-        Huamin Qu
-      </div>
+      <div class="pub-item">
+        <div class="pub-img-container">
+          <img src="fig/four_S4D.png" alt="Paper Teaser" class="pub-img">
+        </div>
+  
+        <div class="pub-text">
+          <div class="pub-paper-title">
+            Towards Understanding Time-Varying Spatial 3D Data Analysis with
+            Animation and Small Multiples in Virtual Reality and Desktop
+          </div>
     
-      <div class="pub-meta">
-        IEEE Conference on Virtual Reality and 3D User Interfaces (2026)
-        <!-- —
-        <span class="pub-status">Accepted (Camera-ready submitted)</span> -->
+          <div class="pub-authors">
+            Lin-Ping Yuan,
+            <strong>Le Lin</strong>,
+            Yuquan Lin,
+            Jun Han,
+            Zikun Deng,
+            Weicong Cheng,
+            Huamin Qu
+          </div>
+        
+          <div class="pub-meta">
+            IEEE Conference on Virtual Reality and 3D User Interfaces (2026)
+            <!-- —
+            <span class="pub-status">Accepted (Camera-ready submitted)</span> -->
+          </div>
+        </div>
       </div>
-    </div>
     </a>
   </div>
   
