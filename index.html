@@ -32,7 +32,7 @@
     .gallery-track {
       display: flex;
       flex-wrap: nowrap;
-      gap: 20px;
+      /*gap: 20px;*/
       align-items: center;
       /* 初始状态居中 */
       transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -199,6 +199,7 @@
 
   <!-- 🖼 Paintings Section -->
   <div class="gallery">
+    <div class="gallery-track">
     <div class="gallery-item"><img src="https://buggingcat.github.io/paintings/09a7b3c3d23d1c417ce1e43dceb2e5d1.jpg" style="width: 280px;" alt="Unable to load image sunshine"></div>
     <!--<div class="gallery-item"><img src="https://buggingcat.github.io/paintings/人像2.png" style="width: 115px;" alt="Unable to load image human2"></div>-->
     <div class="gallery-item"><img src="https://buggingcat.github.io/paintings/10.png" style="width: 280px;" alt="Unable to load image sea"></div>
@@ -206,6 +207,7 @@
     <div class="gallery-item"><img src="https://buggingcat.github.io/paintings/2ce5e5e973cccc5707af9a3ea36a9ec.jpg" style="width: 180px;"alt="Unable to load watercolor painting"></div>
     <!--<div class="gallery-item"><img src="https://buggingcat.github.io/paintings/cat1.png" style="width: 105px;" alt="Unable to load image cat"></div>-->
     <div class="gallery-item" title="Orienteering flag designed by me · 2023"><img src="https://buggingcat.github.io/paintings/9a8a7ae136e4c4907016d50a35af6721.png" style="width: 160px;" alt="Unable to load image orienteering flag"></div>
+    </div>
     <!-- Add more images as needed -->
     <div class="gallery-title">My Gallery</div>
   </div>
@@ -274,32 +276,32 @@
     let offset = 0; // 当前累积的位移量
     let scrollTimer = null; // 用于判断滚动停止的计时器
     gallery.addEventListener('wheel', (evt) => {
-      const trackWidth = track.scrollWidth;
-      const galleryWidth = gallery.clientWidth;
-      const isOverflowing = trackWidth > galleryWidth;
-    
+      if (!track) return;
       if (evt.deltaY !== 0) {
         evt.preventDefault();
         
-        // 阻尼计算
-        const maxStretch = galleryWidth * 0.5; // 最大晃动幅度限制在半屏
+        // 阻尼感：拉得越远，阻力越大
+        const maxStretch = window.innerWidth * 0.4; 
         const damping = 1 - Math.abs(offset) / (maxStretch + 1);
         
-        // 累加位移
-        offset -= evt.deltaY * 0.6 * damping;
-    
-        // 应用位移 (实时跟随滚轮)
+        // 累加位移（根据滚轮方向决定正负）
+        offset -= evt.deltaY * 0.8 * damping;
+
+        // 限制最大位移
+        if (offset > maxStretch) offset = maxStretch;
+        if (offset < -maxStretch) offset = -maxStretch;
+
+        // 实时应用位移，取消过渡动画以防延迟粘滞
         track.style.transition = 'none';
         track.style.transform = `translateX(${offset}px)`;
-    
-        // 处理回弹
+
+        // 停止滚动 50ms 后启动回弹动画
         clearTimeout(scrollTimer);
         scrollTimer = setTimeout(() => {
           offset = 0;
-          track.style.transition = 'transform 0.7s cubic-bezier(0.25, 1, 0.5, 1)';
+          track.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
           track.style.transform = `translateX(0px)`;
         }, 50);
-      }
     }, { passive: false });
   </script>
 
