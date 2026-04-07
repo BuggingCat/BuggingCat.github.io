@@ -15,7 +15,8 @@
       display: flex;
       /*flex-wrap: nowrap; 
       gap: 20px;*/
-      justify-content: flex-start;
+      justify-content: center; 
+      align-items: flex-start;
       margin-top: 50px;
       overflow: hidden;         /* 隐藏容器溢出的内容--滚动条 */
       /*overflow-x: auto;
@@ -299,16 +300,26 @@
     // 手机端触摸
     gallery.addEventListener('touchstart', (evt) => {
       isTouching = true;
-      lastX = evt.touches[0].clientX;
+      startX = evt.touches[0].clientX;
+      startY = evt.touches[0].clientY;
+      lastX = startX;
       clearTimeout(scrollTimer);
     }, { passive: true });
-    
+
     gallery.addEventListener('touchmove', (evt) => {
       if (!isTouching) return;
       const currentX = evt.touches[0].clientX;
-      const deltaX = lastX - currentX;
-      lastX = currentX;
-      applyBounce(deltaX * 1.2);
+      const currentY = evt.touches[0].clientY;
+      const diffX = Math.abs(currentX - startX);
+      const diffY = Math.abs(currentY - startY);
+      if (diffX > diffY) {
+        if (evt.cancelable) evt.preventDefault(); 
+        const deltaX = lastX - currentX;
+        lastX = currentX;
+        applyBounce(deltaX * 1.5);
+      } else {
+        isTouching = false; 
+      }
     }, { passive: false });
 
     gallery.addEventListener('touchend', () => {
