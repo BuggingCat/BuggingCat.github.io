@@ -15,19 +15,26 @@
       display: flex;
       flex-wrap: nowrap; 
       gap: 20px;
-      /*justify-content: center;*/
+      justify-content: center; /*居中*/
       margin-top: 50px;
       /*overflow: hidden; */        /* 隐藏容器溢出的内容--滚动条 */
       overflow-x: auto;
       overflow-y: hidden;
       height: 220px;          /* 设置更大的高度 */
       box-sizing: border-box;
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); /*回弹的平滑动画*/
       /* 隐藏滚动条（Chrome, Safari） */
       scrollbar-width: none;       /* Firefox */
       -ms-overflow-style: none;    /* IE/Edge */
     }
+
+    .gallery::before,
+    .gallery::after {
+      content: '';
+      flex: 1;
+    }
     .gallery::-webkit-scrollbar {
-      /*display: none;*/               /* Chrome/Safari */
+      display: none;               /* Chrome/Safari */
     }
     .gallery-item {
       flex: 0 0 auto;             /* 关键：防止图片被挤压变窄 */
@@ -252,13 +259,45 @@
     
     // 左右滑动
     const gallery = document.querySelector('.gallery');
+    let offset = 0; // 当前累积的位移量
+    let scrollTimer = null; // 用于判断滚动停止的计时器
     gallery.addEventListener('wheel', (evt) => {
+      const isOverflowing = gallery.scrollWidth > gallery.clientWidth;
       if (evt.deltaY !== 0) {
-        evt.preventDefault();
-        gallery.scrollBy({
-          left: evt.deltaY * 2, 
-          behavior: 'auto'  
-        });
+        if (isOverflowing) {
+          // 如果内容多，正常滚动
+          evt.preventDefault();
+          gallery.scrollBy({
+            left: evt.deltaY * 2,
+            behavior: 'auto'
+          });
+        } else {
+          // 如果内容少（居中状态），给它一个微小的位移感再弹回
+          evt.preventDefault();
+          // 阻尼系数：1 - (当前位移 / 屏幕宽度)，保证最大不超过屏幕宽度
+          const maxStretch = window.innerWidth; 
+          const damping = 1 - Math.abs(offset) / maxStretch;
+          
+          // 更新位移值（evt.deltaY 为正向右滚，我们反向移动 gallery）
+          offset -= evt.deltaY * 0.5 * damping; 
+
+          // 限制最大位移不超过一个屏幕
+          if (offset > maxStretch) offset = maxStretch;
+          if (offset < -maxStretch) offset = -maxStretch;
+
+          // 应用位移，同时临时取消 transition 以保证跟随滚轮时实时响应
+          gallery.style.transition = 'none';
+          gallery.style.transform = `translateX(${offset}px)`;
+
+          // 处理回弹逻辑
+          clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(() => {
+            // 恢复 transition 动画，位移归零
+            offset = 0;
+            gallery.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+            gallery.style.transform = `translateX(0px)`;
+          }, 50); // 滚轮停止 50ms 后回弹
+        }
       }
     }, { passive: false });
   </script>
