@@ -15,12 +15,13 @@
       display: flex;
       flex-wrap: nowrap; 
       gap: 20px;
-      justify-content: center;
+      /*justify-content: center;*/
       margin-top: 50px;
       /*overflow: hidden; */        /* 隐藏容器溢出的内容--滚动条 */
       overflow-x: auto;
       overflow-y: hidden;
       height: 220px;          /* 设置更大的高度 */
+      box-sizing: border-box;
       /* 隐藏滚动条（Chrome, Safari） */
       scrollbar-width: none;       /* Firefox */
       -ms-overflow-style: none;    /* IE/Edge */
@@ -29,6 +30,7 @@
       /*display: none;*/               /* Chrome/Safari */
     }
     .gallery-item {
+      flex: 0 0 auto;             /* 关键：防止图片被挤压变窄 */
       opacity: 0;
       transform: translateY(30px);
       border-radius: 0;
@@ -179,6 +181,7 @@
 
   <!-- 🖼 Paintings Section -->
   <div class="gallery">
+    <div class="gallery-item"><img src="https://buggingcat.github.io/paintings/09a7b3c3d23d1c417ce1e43dceb2e5d1.jpg" style="width: 280px;" alt="Unable to load image sunshine"></div>
     <!--<div class="gallery-item"><img src="https://buggingcat.github.io/paintings/人像2.png" style="width: 115px;" alt="Unable to load image human2"></div>-->
     <div class="gallery-item"><img src="https://buggingcat.github.io/paintings/10.png" style="width: 280px;" alt="Unable to load image sea"></div>
     <div class="gallery-item"><img src="https://buggingcat.github.io/paintings/夕阳2.png" style="width: 160px;" alt="Unable to load image sunset"></div>
@@ -251,8 +254,11 @@
     const gallery = document.querySelector('.gallery');
     gallery.addEventListener('wheel', (evt) => {
       if (evt.deltaY !== 0) {
-        evt.preventDefault(); 
-        gallery.scrollLeft += evt.deltaY; 
+        evt.preventDefault();
+        gallery.scrollBy({
+          left: evt.deltaY * 2, 
+          behavior: 'auto'  
+        });
       }
     }, { passive: false });
   </script>
