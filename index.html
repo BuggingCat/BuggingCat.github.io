@@ -12,20 +12,31 @@
     .gallery {
       width: 100vw;              /* 占满整个视口宽度 */
       background-color: #d5f0f0;
-      display: flex;
+      /* display: flex;
       flex-wrap: nowrap; 
-      gap: 20px;
-      justify-content: center; /*居中*/
+      gap: 20px;*/
+      justify-content: center;  /*居中*/
       margin-top: 50px;
-      /*overflow: hidden; */        /* 隐藏容器溢出的内容--滚动条 */
-      overflow-x: auto;
-      overflow-y: hidden;
+      overflow: hidden;         /* 隐藏容器溢出的内容--滚动条 */
+      /*overflow-x: auto;
+      overflow-y: hidden;*/
       height: 220px;          /* 设置更大的高度 */
-      box-sizing: border-box;
-      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); /*回弹的平滑动画*/
+      /*transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);*/ /*回弹的平滑动画*/
       /* 隐藏滚动条（Chrome, Safari） */
-      scrollbar-width: none;       /* Firefox */
-      -ms-overflow-style: none;    /* IE/Edge */
+      /*scrollbar-width: none;  */     /* Firefox */
+      /*-ms-overflow-style: none; */   /* IE/Edge */
+      position: relative;
+      display: flex;
+    }
+
+    .gallery-track {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 20px;
+      align-items: center;
+      /* 初始状态居中 */
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      will-change: transform;
     }
 
     .gallery::before,
@@ -259,45 +270,35 @@
     
     // 左右滑动
     const gallery = document.querySelector('.gallery');
+    const track = document.querySelector('.gallery-track');
     let offset = 0; // 当前累积的位移量
     let scrollTimer = null; // 用于判断滚动停止的计时器
     gallery.addEventListener('wheel', (evt) => {
-      const isOverflowing = gallery.scrollWidth > gallery.clientWidth;
+      const trackWidth = track.scrollWidth;
+      const galleryWidth = gallery.clientWidth;
+      const isOverflowing = trackWidth > galleryWidth;
+    
       if (evt.deltaY !== 0) {
-        if (isOverflowing) {
-          // 如果内容多，正常滚动
-          evt.preventDefault();
-          gallery.scrollBy({
-            left: evt.deltaY * 2,
-            behavior: 'auto'
-          });
-        } else {
-          // 如果内容少（居中状态），给它一个微小的位移感再弹回
-          evt.preventDefault();
-          // 阻尼系数：1 - (当前位移 / 屏幕宽度)，保证最大不超过屏幕宽度
-          const maxStretch = window.innerWidth; 
-          const damping = 1 - Math.abs(offset) / maxStretch;
-          
-          // 更新位移值（evt.deltaY 为正向右滚，我们反向移动 gallery）
-          offset -= evt.deltaY * 0.5 * damping; 
-
-          // 限制最大位移不超过一个屏幕
-          if (offset > maxStretch) offset = maxStretch;
-          if (offset < -maxStretch) offset = -maxStretch;
-
-          // 应用位移，同时临时取消 transition 以保证跟随滚轮时实时响应
-          gallery.style.transition = 'none';
-          gallery.style.transform = `translateX(${offset}px)`;
-
-          // 处理回弹逻辑
-          clearTimeout(scrollTimer);
-          scrollTimer = setTimeout(() => {
-            // 恢复 transition 动画，位移归零
-            offset = 0;
-            gallery.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
-            gallery.style.transform = `translateX(0px)`;
-          }, 50); // 滚轮停止 50ms 后回弹
-        }
+        evt.preventDefault();
+        
+        // 阻尼计算
+        const maxStretch = galleryWidth * 0.5; // 最大晃动幅度限制在半屏
+        const damping = 1 - Math.abs(offset) / (maxStretch + 1);
+        
+        // 累加位移
+        offset -= evt.deltaY * 0.6 * damping;
+    
+        // 应用位移 (实时跟随滚轮)
+        track.style.transition = 'none';
+        track.style.transform = `translateX(${offset}px)`;
+    
+        // 处理回弹
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          offset = 0;
+          track.style.transition = 'transform 0.7s cubic-bezier(0.25, 1, 0.5, 1)';
+          track.style.transform = `translateX(0px)`;
+        }, 50);
       }
     }, { passive: false });
   </script>
