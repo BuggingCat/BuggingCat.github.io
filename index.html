@@ -246,6 +246,15 @@
 
     document.querySelectorAll('.gallery-item').forEach(el => observer.observe(el));
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    
+    // 左右滑动
+    const gallery = document.querySelector('.gallery');
+    gallery.addEventListener('wheel', (evt) => {
+      if (evt.deltaY !== 0) {
+        evt.preventDefault(); 
+        gallery.scrollLeft += evt.deltaY; 
+      }
+    }, { passive: false });
   </script>
 
 </body>
