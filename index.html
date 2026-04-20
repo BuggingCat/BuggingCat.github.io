@@ -127,11 +127,12 @@
     }
     
     .pub-item {
-      border: 1px solid #ddd;
+      border: 1px solid transparent; /* 其他三边透明 */
+      border-bottom: 1px solid #f0f0f0; /* 底部淡灰色底线 */
       border-radius: 10px;
       padding: 14px 18px;
       margin-bottom: 16px;
-      transition: border-color 0.25s ease;
+      transition: all 0.3s ease;
       cursor: pointer; /* 鼠标悬停时变成小手 */
       display: flex;
       gap: 20px;
@@ -139,7 +140,10 @@
     }
     
     .pub-item:hover {
-      border-color: #bcd7ff;
+      border-color: #0AC4B2; /* 使用你喜欢的青绿色，或者改为更淡的颜色 */
+      background-color: rgba(10, 196, 178, 0.03); /* 背景加一点点极淡的青色，更有点击感 */
+      box-shadow: none;
+      /*border-color: #bcd7ff;*/
       box-shadow: none;
     }
 
@@ -233,9 +237,9 @@
     
         <div class="pub-authors">
           <strong>Le Lin</strong>,
-          <a href="https://lumia-zhu.github.io/index.html" target="_blank" style="color: #0AC4B2;">Zihao Zhu</a>,
-          <a href="https://scholar.google.com/citations?user=F9nUg6IAAAAJ&hl=zh-CN" target="_blank" style="color: #0AC4B2;">Rainbow Tin Hung Ho</a>,
-          <a href="https://scholar.google.com/citations?user=3s9f9VIAAAAJ&hl=zh-CN" target="_blank" style="color: #0AC4B2;">Jing Liao</a>,
+          <a href="https://lumia-zhu.github.io/index.html" target="_blank" style="color: #119696;">Zihao Zhu</a>,
+          <a href="https://scholar.google.com/citations?user=F9nUg6IAAAAJ&hl=zh-CN" target="_blank" style="color: #119696;">Rainbow Tin Hung Ho</a>,
+          <a href="https://scholar.google.com/citations?user=3s9f9VIAAAAJ&hl=zh-CN" target="_blank" style="color: #119696;">Jing Liao</a>,
           <a href="https://yuhanlolo.github.io/me/" target="_blank" style="color: #0AC4B2;">Yuhan Luo</a>
         </div>
         
