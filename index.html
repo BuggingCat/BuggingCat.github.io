@@ -190,6 +190,31 @@
       color: #9da6b2;
       font-weight: 500;
     }
+
+    .pub-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    
+    .pub-button {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background-color: #118096;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      line-height: 1.5;
+      transition: all 0.25s ease;
+    }
+    
+    .pub-button:hover {
+      background-color: #0a6f82;
+      transform: translateY(-1px);
+    }
   </style>
 </head>
 <body>
@@ -199,7 +224,6 @@
     <div class="gallery-track">
     <div class="gallery-item"><img src="https://buggingcat.github.io/paintings/09a7b3c3d23d1c417ce1e43dceb2e5d1.jpg" style="width: 280px;" alt="Unable to load image sunshine"></div>
     <div class="gallery-item"><img src="https://buggingcat.github.io/paintings/10.png" style="width: 280px;" alt="Unable to load image sea"></div>
-      <div class="gallery-item"><img src="https://buggingcat.github.io/paintings/天空之城@0.1x.png" style="width: 280px;" alt="Unable to load image sky"></div>
     <div class="gallery-item"><img src="https://buggingcat.github.io/paintings/夕阳2.png" style="width: 160px;" alt="Unable to load image sunset"></div>
     <div class="gallery-item"><img src="https://buggingcat.github.io/paintings/2ce5e5e973cccc5707af9a3ea36a9ec.jpg" style="width: 180px;"alt="Unable to load watercolor painting"></div>
     <div class="gallery-item" title="Orienteering flag designed by me · 2023"><img src="https://buggingcat.github.io/paintings/9a8a7ae136e4c4907016d50a35af6721.png" style="width: 160px;" alt="Unable to load image orienteering flag"></div>
@@ -212,7 +236,7 @@
     <h1>Hello, I'm Le LIN ~ </h1>
     <img src="https://buggingcat.github.io/01.png" alt="Unable to load bugcat" class="intro-image fade-in">
     <p>Welcome to my page! 
-      I'm currently an MPhil student in Computer Science at City University of Hong Kong, supervised by <a href="https://scholar.google.com/citations?user=3s9f9VIAAAAJ&hl=zh-CN" target="_blank" style="color: #0AC4B2; text-decoration: none;">Prof. Jing LIAO</a>.
+      I'm currently an MPhil student in Computer Science at City University of Hong Kong, supervised by <a href="https://scholar.google.com/citations?user=3s9f9VIAAAAJ&hl=zh-CN" target="_blank" style="color: #0DBFCF; text-decoration: none;">Prof. Jing LIAO</a>.
       Previously, I worked as a visiting student at the <a href="http://vis.cse.ust.hk/index.html" target="_blank" style="color: #0AC4B2; text-decoration: none;">HKUST VisLab</a>.
       I received my Bachelor of Science in Mathematics and Applied Mathematics from South China University of Technology, under the supervision of <a href="https://www2.scut.edu.cn/cs/2017/0629/c22284a328097/page.psp" target="_blank" style="color: #0AC4B2; text-decoration: none;">Prof. GuiQing LI</a>. I also completed a minor in Computer Science and Technology.
     </p>
@@ -243,12 +267,12 @@
         <div class="pub-meta">
           ACM Conference on Designing Interactive Systems, 2026 Works-in-Progress
         </div>
-        <div class="pub-meta">
-          <a href="https://dl.acm.org/doi/10.1145/3802974.3809425" target="_blank" style="color: #118096; text-decoration: none;">[ACM]</a>
-          <a href="https://arxiv.org/abs/2602.14183" target="_blank" style="color: #118096; text-decoration: none;">[arXiv]</a>
-          <a href="https://BuggingCat.github.io/documents/DIS26_WiP_Therapeutic_Art_Poster.pdf" target="_blank" style="color: #118096; text-decoration: none;">[Poster]</a>
-          <a href="https://ai4therapy.github.io/pdf/ID-1.pdf" target="_blank" style="color: #118096; text-decoration: none;">[Related Workshop]</a>
-          <a href="https://BuggingCat.github.io/documents/DIS26_WiP_Therapeutic_Art_workshop_slides.pdf" target="_blank" style="color: #118096; text-decoration: none;">[Slides]</a>
+        <div class="pub-meta pub-buttons">
+          <a href="https://dl.acm.org/doi/10.1145/3802974.3809425" target="_blank" class="pub-button">ACM</a>
+          <a href="https://arxiv.org/abs/2602.14183" target="_blank" class="pub-button">arXiv</a>
+          <a href="https://BuggingCat.github.io/documents/DIS26_WiP_Therapeutic_Art_Poster.pdf" target="_blank" class="pub-button">Poster</a>
+          <a href="https://ai4therapy.github.io/pdf/ID-1.pdf" target="_blank" class="pub-button">Related Workshop</a>
+          <a href="https://BuggingCat.github.io/documents/DIS26_WiP_Therapeutic_Art_workshop_slides.pdf" target="_blank" class="pub-button">Slides</a>
         </div>
       </div>
     </div>
@@ -280,8 +304,8 @@
           <!-- —
           <span class="pub-status">Accepted (Camera-ready submitted)</span> -->
         </div>
-        <div class="pub-meta">
-          <a href="https://ieeexplore.ieee.org/abstract/document/11457508" target="_blank" style="color: #118096; text-decoration: none;">[IEEE]</a>
+        <div class="pub-meta pub-buttons">
+          <a href="https://ieeexplore.ieee.org/abstract/document/11457508" target="_blank" class="pub-button">IEEE</a>
         </div>
       </div>
     </div>
